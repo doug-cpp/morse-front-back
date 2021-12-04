@@ -11,8 +11,8 @@ def config_morse_socket(app):
     @ws.on('morseEvt', namespace='/morse')
     def receive_message(message):
         if message['data'] == SOCKET_CONNECTED:
-            emit('morseEvtResponse', {'data': WELLCOME_MESSAGE})
+            emit('morseEvtResponse', {'data': WELLCOME_MESSAGE}, broadcast=True)
         else:
-            emit('morseEvtResponse', {'data': Interpreter.text(message['data'])})
+            emit('morseEvtResponse', {'data': Interpreter.text(message['data'])}, broadcast=True)
 
     return ws
